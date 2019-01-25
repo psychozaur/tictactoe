@@ -13,17 +13,19 @@ public class HumanPlayerTest {
 
     Board board;
     Symbol symbol;
+    String name;
 
     @Before
     public void setUp(){
         board = new Board(3);
         symbol = new Cross();
+        name = "Marcin";
     }
 
     @Test
     public void testIfHumanPlayerCreationIsPossible(){
 
-        Player player = new HumanPlayer(symbol,board);
+        Player player = new HumanPlayer(symbol,board,name);
 
         assertEquals(symbol,((HumanPlayer) player).getPlayerSymbol());
 
@@ -32,7 +34,7 @@ public class HumanPlayerTest {
     @Test
     public void testIsCorrectAddressReturnedAfterEnteringInput(){
 
-        Player player = new HumanPlayer(symbol,board);
+        Player player = new HumanPlayer(symbol,board,name);
 //        Scanner scanner = new Scanner(System.in);
 
 //        int search = scanner.nextInt();
@@ -46,7 +48,7 @@ public class HumanPlayerTest {
     @Test
     public void testIfIllegalInputThrowsException(){
 
-        Player player = new HumanPlayer(symbol,board);
+        Player player = new HumanPlayer(symbol,board,name);
         int search = -1;
 
         try {
