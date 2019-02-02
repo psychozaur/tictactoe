@@ -5,6 +5,9 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
+
+import static org.junit.Assert.assertTrue;
 
 public class GameMenuTest {
 
@@ -17,6 +20,9 @@ public class GameMenuTest {
     EndOfGame eog;
     BoardDisplay bd;
     GameMenu menu;
+
+    int numberInput;
+    String nameInput;
 
     @Before
     public void setUp(){
@@ -32,9 +38,23 @@ public class GameMenuTest {
     }
 
     @Test
-    public void testIfItDisplaysProperMessagesForUser(){
+    public void testIfIsQuit(){
+
+        boolean result;
+        menu.displayGameTitle();
+        numberInput = 2;
+
+        result = menu.isQuit(0,2);
+
+        assertTrue(result);
+
+    }
+
+    @Test
+    public void testInitialDisplay(){
 
         menu.displayGameTitle();
-        menu.display();
+        menu.displayOptions(1);
+        bd.display();
     }
 }
