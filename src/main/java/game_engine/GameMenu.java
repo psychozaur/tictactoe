@@ -1,5 +1,6 @@
 package game_engine;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -11,7 +12,7 @@ public class GameMenu {
 
     private Random random;
 
-    private int selector;
+    private GameState selector;
 
     private List<String> messages = new ArrayList<>();
 
@@ -21,6 +22,9 @@ public class GameMenu {
 
     private final String nameMessage = "What's your name, player?";
     private final String symbolMessage = "Choose your symbol: Cross ('1') or Nought ('2').";
+    private String currentPlayersMessage = "";
+    private String whoWonMessage = " won. ";
+    private String wasDrawMessage = "Cat's game. ";
     private final String quitMessage = "Goodbye";
 
     private String nameOfPlayerOne;
@@ -31,18 +35,20 @@ public class GameMenu {
         messages.add(playerModeMessage);
         messages.add(nameMessage);
         messages.add(symbolMessage);
-        messages.add("");
+        messages.add(currentPlayersMessage);
+        messages.add(whoWonMessage);
+        messages.add(wasDrawMessage);
         messages.add(quitMessage);
     }
 
     public GameMenu(GameManager gm) {
         this.gm = gm;
-        this.selector = 0;
+        this.selector = GameState.GAME_START;
         populateMessageList();
     }
 
-    public String getMessage(int selector) {
-        return messages.get(selector);
+    public String getMessage(int index) {
+        return messages.get(index);
     }
 
     public String getNameOfPlayerOne() {
@@ -74,47 +80,40 @@ public class GameMenu {
         System.out.println("===========");
     }
 
-    public void displayOptions(int choice) {
-        if (isQuit(selector,choice)){
-            System.out.println(getMessage(5));
-            System.out.println();
-        } else {
-            System.out.println(getMessage(selector));
-            System.out.println();
-//            selector++;
-        }
+    public void displayOptions() {
+        System.out.println(messages.get(0));
     }
 
-    public void processNumberInput(int choice){
+    public void processGameState(){
         switch(selector){
-            case 0:
-                displayOptions(choice);
+            case GAME_START:
+                displayOptions();
                 break;
-            case 1:
-                displayOptions(choice);
+            case GAME_SETUP:
+                displayOptions();
                 break;
-            case 2:
-                displayOptions(choice);
+            case GAME_RUNNING:
+                displayOptions();
                 break;
-            case 3:
-                displayOptions(choice);
+            case GAME_WON:
+                displayOptions();
                 break;
-            case 4:
-                displayOptions(choice);
+            case GAME_DRAW:
+                displayOptions();
                 break;
-            case 5:
-                displayOptions(choice);
+            case GAME_QUIT:
+                displayOptions();
                 break;
             default:
                 break;
         }
-        displayOptions(choice);
+        displayOptions();
     }
 
-    public void processNameInput(String name){
-
+    public void flush(){
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
-
 
     public void display(){
 

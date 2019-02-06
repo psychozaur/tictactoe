@@ -3,10 +3,13 @@ package game_engine;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class GameMenuTest {
@@ -54,7 +57,25 @@ public class GameMenuTest {
     public void testInitialDisplay(){
 
         menu.displayGameTitle();
-        menu.displayOptions(1);
+        menu.displayOptions();
         bd.display();
+    }
+
+    @Test
+    public void testScreenFlush(){
+
+        menu.displayGameTitle();
+        menu.displayOptions();
+        bd.display();
+        menu.flush();
+
+        String input = "jkl";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        Scanner reader = new Scanner(System.in);
+        String s = reader.next();
+
+        assertEquals("jkl",s);
+
     }
 }
