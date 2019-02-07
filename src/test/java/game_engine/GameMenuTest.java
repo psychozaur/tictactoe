@@ -4,13 +4,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class GameMenuTest {
 
@@ -45,9 +45,13 @@ public class GameMenuTest {
 
         boolean result;
         menu.displayGameTitle();
-        numberInput = 2;
 
-        result = menu.isQuit(0,2);
+        String input = "2";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+//        menu.processChoice();
+
+        result = menu.isQuit();
 
         assertTrue(result);
 
@@ -57,25 +61,25 @@ public class GameMenuTest {
     public void testInitialDisplay(){
 
         menu.displayGameTitle();
-        menu.displayOptions();
+        menu.processGameState();
         bd.display();
     }
 
     @Test
-    public void testScreenFlush(){
+    public void testSetupDisplay(){
 
         menu.displayGameTitle();
-        menu.displayOptions();
+        menu.processGameState();
         bd.display();
-        menu.flush();
 
-        String input = "jkl";
+        String input = "1";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
-        Scanner reader = new Scanner(System.in);
-        String s = reader.next();
+//        menu.processChoice();
 
-        assertEquals("jkl",s);
+        menu.processGameState();
+
+        assertFalse(menu.isQuit());
 
     }
 }

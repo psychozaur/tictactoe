@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 public class GameMenu {
 
@@ -67,8 +68,8 @@ public class GameMenu {
         this.nameOfPlayerTwo = nameOfPlayerTwo;
     }
 
-    public boolean isQuit(int selector, int choice) {
-        if (selector == 0 && choice == 2 || selector == 5) {
+    public boolean isQuit() {
+        if (selector == (GameState.GAME_QUIT)) {
             return true;
         }
         return false;
@@ -80,34 +81,108 @@ public class GameMenu {
         System.out.println("===========");
     }
 
-    public void displayOptions() {
-        System.out.println(messages.get(0));
+    public int readIntChoice (){
+        Scanner reader = new Scanner(System.in);
+        return reader.nextInt();
+    }
+
+    public String readStringChoice (){
+        Scanner reader = new Scanner(System.in);
+        return reader.next();
+    }
+
+    public void processChoice (int intInput, Consumer<GameState> case1, Consumer<GameState> case2){
+        switch(intInput){
+            case 1:
+                selector = GameState.GAME_SETUP;
+                break;
+            case 2:
+                selector = GameState.GAME_QUIT;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void processChoice (String stringInput){
+
+    }
+
+    public void evaluateGameProgress (int messageIndex){
+        int result = this.readIntChoice();
+
+        switch(selector){
+            case GAME_START:
+                switch(result){
+                    case 1:
+                        selector = GameState.GAME_SETUP;
+                        break;
+                    case 2:
+                        selector = GameState.GAME_QUIT;
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case GAME_SETUP:
+                for (int i = 1; i <= 3; i++){
+                    displayOptions(i);
+
+                }
+                break;
+            case GAME_RUNNING:
+                displayOptions(4);
+                break;
+            case GAME_WON:
+                displayOptions(5);
+                break;
+            case GAME_DRAW:
+                displayOptions(6);
+                break;
+            case GAME_QUIT:
+                displayOptions(7);
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    public void displayOptions(int index) {
+        System.out.println(messages.get(index));
     }
 
     public void processGameState(){
         switch(selector){
             case GAME_START:
-                displayOptions();
+                displayOptions(0);
+                evaluateGameProgress(0);
                 break;
             case GAME_SETUP:
-                displayOptions();
+                for (int i = 1; i <= 3; i++){
+                    displayOptions(i);
+                    evaluateGameProgress(i);
+                }
                 break;
             case GAME_RUNNING:
-                displayOptions();
+                displayOptions(4);
+                evaluateGameProgress(4);
                 break;
             case GAME_WON:
-                displayOptions();
+                displayOptions(5);
+                evaluateGameProgress(5);
                 break;
             case GAME_DRAW:
-                displayOptions();
+                displayOptions(6);
+                evaluateGameProgress(6);
                 break;
             case GAME_QUIT:
-                displayOptions();
+                displayOptions(7);
+                evaluateGameProgress(7);
                 break;
             default:
                 break;
         }
-        displayOptions();
     }
 
     public void flush(){
