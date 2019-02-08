@@ -33,8 +33,8 @@ public class GameMenuTest {
         aiSymbol = new Nought();
         board = new Board(3);
         eog = new EndOfGame(board);
-        players = Arrays.asList(new HumanPlayer(symbol, board, "Marcin"),
-                new AIPlayer(aiSymbol, board));
+        players = Arrays.asList(new HumanPlayer(board),
+                new AIPlayer(board));
         gm = new GameManager(players, eog);
         bd = new BoardDisplay(board);
         menu = new GameMenu(gm);
@@ -49,7 +49,10 @@ public class GameMenuTest {
         String input = "2";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
-//        menu.processChoice();
+        menu.processGameState(
+                () -> GameState.GAME_SETUP,
+                () -> GameState.GAME_QUIT
+        );
 
         result = menu.isQuit();
 
@@ -61,7 +64,7 @@ public class GameMenuTest {
     public void testInitialDisplay(){
 
         menu.displayGameTitle();
-        menu.processGameState();
+//        menu.processGameState();
         bd.display();
     }
 
@@ -69,7 +72,7 @@ public class GameMenuTest {
     public void testSetupDisplay(){
 
         menu.displayGameTitle();
-        menu.processGameState();
+//        menu.processGameState();
         bd.display();
 
         String input = "1";
@@ -77,7 +80,7 @@ public class GameMenuTest {
         System.setIn(in);
 //        menu.processChoice();
 
-        menu.processGameState();
+//        menu.processGameState();
 
         assertFalse(menu.isQuit());
 

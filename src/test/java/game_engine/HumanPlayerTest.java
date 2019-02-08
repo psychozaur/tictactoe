@@ -25,7 +25,7 @@ public class HumanPlayerTest {
     @Test
     public void testIfHumanPlayerCreationIsPossible(){
 
-        Player player = new HumanPlayer(symbol,board,name);
+        Player player = new HumanPlayer(board);
 
         assertEquals(symbol,((HumanPlayer) player).getPlayerSymbol());
 
@@ -34,7 +34,7 @@ public class HumanPlayerTest {
     @Test
     public void testIsCorrectAddressReturnedAfterEnteringInput(){
 
-        Player player = new HumanPlayer(symbol,board,name);
+        Player player = new HumanPlayer(board);
 //        Scanner scanner = new Scanner(System.in);
 
 //        int search = scanner.nextInt();
@@ -48,7 +48,7 @@ public class HumanPlayerTest {
     @Test
     public void testIfIllegalInputThrowsException(){
 
-        Player player = new HumanPlayer(symbol,board,name);
+        Player player = new HumanPlayer(board);
         int search = -1;
 
         try {

@@ -1,9 +1,6 @@
 package game_engine;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class HumanPlayer implements Player {
 
@@ -11,22 +8,29 @@ public class HumanPlayer implements Player {
     private Board gameBoard;
     private String name;
 
-    public HumanPlayer(Symbol playerSymbol, Board gameBoard, String name) {
-        this.playerSymbol = playerSymbol;
+    public HumanPlayer(Board gameBoard) {
         this.gameBoard = gameBoard;
-        this.name = name;
     }
 
-    public Symbol getPlayerSymbol() {
-        return playerSymbol;
+    public Optional<Symbol> getPlayerSymbol() {
+        return Optional.ofNullable(playerSymbol);
+    }
+
+    public void setPlayerSymbol(Symbol playerSymbol) {
+        if (null == this.playerSymbol)
+            this.playerSymbol = playerSymbol;
     }
 
     public Board getGameBoard() {
         return gameBoard;
     }
 
-    public String getName() {
-        return name;
+    public Optional<String> getName() {
+        return Optional.ofNullable(name);
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 
     public List<Integer> getCellAddressAfterInput (int search){

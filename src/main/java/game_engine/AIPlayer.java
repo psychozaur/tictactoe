@@ -3,6 +3,7 @@ package game_engine;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class AIPlayer implements Player {
 
@@ -10,23 +11,30 @@ public class AIPlayer implements Player {
     private Board gameBoard;
     private String name;
 
-    public AIPlayer(Symbol aiSymbol, Board gameBoard) {
-        this.aiSymbol = aiSymbol;
+    public AIPlayer(Board gameBoard) {
         this.gameBoard = gameBoard;
         this.name = "Computer";
     }
 
-    public Symbol getPlayerSymbol() {
-        return aiSymbol;
+    public Optional<Symbol> getPlayerSymbol() {
+        return Optional.ofNullable(aiSymbol);
+    }
+
+    public void setPlayerSymbol(Symbol aiSymbol) {
+        if (null == this.aiSymbol)
+            this.aiSymbol = aiSymbol;
     }
 
     public Board getGameBoard() {
         return gameBoard;
     }
 
-    public String getName() {
-        return name;
+    public Optional<String> getName() {
+        return Optional.ofNullable(name);
     }
+
+    public void setName(String name){}
+
 
     public List<Integer> getCellAddressAfterInput (int search){
         List<Integer> coordinates = new ArrayList<Integer>();

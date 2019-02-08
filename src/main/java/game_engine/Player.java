@@ -1,12 +1,15 @@
 package game_engine;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface Player {
 
-    public Symbol getPlayerSymbol();
+    public Optional<Symbol> getPlayerSymbol();
+    public void setPlayerSymbol(Symbol symbol);
     public Board getGameBoard();
-    public String getName();
+    public Optional<String> getName();
+    public void setName(String name);
     public List<Integer> getCellAddressAfterInput(int search);
 
 }

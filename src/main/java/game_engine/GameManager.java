@@ -30,7 +30,7 @@ public class GameManager {
     public void readMove(int input){
 
         List<Integer> coordinates = currentPlayer.getCellAddressAfterInput(input);
-        currentPlayer.getGameBoard().insert(currentPlayer.getPlayerSymbol(),
+        currentPlayer.getGameBoard().insert(currentPlayer.getPlayerSymbol().orElse(new Symbol()),
                                             coordinates.get(0),
                                             coordinates.get(1));
 

@@ -26,8 +26,8 @@ public class GameManagerTest {
         aiSymbol = new Nought();
         board = new Board(3);
         eog = new EndOfGame(board);
-        players = Arrays.asList(new HumanPlayer(symbol, board, name),
-                            new AIPlayer(aiSymbol, board));
+        players = Arrays.asList(new HumanPlayer(board),
+                            new AIPlayer(board));
         gm = new GameManager(players, eog);
     }
 
