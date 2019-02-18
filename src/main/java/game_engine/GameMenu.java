@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class GameMenu {
@@ -58,6 +59,8 @@ public class GameMenu {
 
     private Player playerOne;
     private Player playerTwo;
+
+    private Player currentPlayer;
 
     private void populateMessageList(){
         messages.add(startMessage);
@@ -127,24 +130,27 @@ public class GameMenu {
         return reader.next();
     }
 
-    public void processChoice (Supplier<GameState> case1, Supplier<GameState> case2){
+    public <R> void processChoice (Function<Player,R> case1, Function<Player,R> case2){
+        R intermediary;
         switch(readIntChoice()){
             case 1:
-                selector = case1.get();
+                intermediary = case1.apply(currentPlayer);
+                selector = (GameState) intermediary;
                 break;
             case 2:
-                selector = case2.get();
+                intermediary = case2.apply(currentPlayer);
+                selector = (GameState) intermediary;
                 break;
             default:
                 break;
         }
     }
-
+//readStringChoice nie wystarczy?
     public void processChoice (String stringInput){
 
     }
 
-    public void evaluateGameProgress (int messageIndex, Supplier<GameState> case1, Supplier<GameState> case2){
+    public <R> void evaluateGameProgress (int messageIndex, Function<Player,R> case1, Function<Player,R> case2){
 //        int result = this.readIntChoice();
 
         switch(selector){
@@ -179,7 +185,7 @@ public class GameMenu {
         System.out.println(messages.get(index));
     }
 
-    public void processGameState(Supplier<GameState> case1, Supplier<GameState> case2){
+    public <R> void processGameState(Function<Player,R> case1, Function<Player,R> case2){
         switch(selector){
             case GAME_START:
                 displayOptions(0);

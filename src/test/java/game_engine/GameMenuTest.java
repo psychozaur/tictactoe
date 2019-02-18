@@ -50,8 +50,8 @@ public class GameMenuTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         menu.processGameState(
-                () -> GameState.GAME_SETUP,
-                () -> GameState.GAME_QUIT
+                (currentPlayer) -> GameState.GAME_SETUP,
+                (currentPlayer) -> GameState.GAME_QUIT
         );
 
         result = menu.isQuit();
