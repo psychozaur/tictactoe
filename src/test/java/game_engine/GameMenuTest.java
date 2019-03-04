@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
@@ -19,6 +20,7 @@ public class GameMenuTest {
     Board board;
     Player currentPlayer;
     List<Player> players;
+    List<Player> players2;
     GameManager gm;
     EndOfGame eog;
     BoardDisplay bd;
@@ -35,9 +37,11 @@ public class GameMenuTest {
         eog = new EndOfGame(board);
         players = Arrays.asList(new HumanPlayer(board),
                 new AIPlayer(board));
+        players2 = Arrays.asList(new HumanPlayer(board),
+                new HumanPlayer(board));
         gm = new GameManager(players, eog);
         bd = new BoardDisplay(board);
-        menu = new GameMenu(gm);
+        menu = new GameMenu(gm, bd);
     }
 
     @Test
@@ -64,25 +68,59 @@ public class GameMenuTest {
     public void testInitialDisplay(){
 
         menu.displayGameTitle();
-//        menu.processGameState();
-        bd.display();
+        String input = "1";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        menu.processGameState(
+                (currentPlayer) -> GameState.GAME_SETUP,
+                (currentPlayer) -> GameState.GAME_QUIT
+        );
+    }
+
+    @Test
+    public void testIsSetup(){
+
+        menu.displayGameTitle();
+
+        String input = "1";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        menu.processGameState(
+                (currentPlayer) -> GameState.GAME_SETUP,
+                (currentPlayer) -> GameState.GAME_QUIT
+        );
+
+        assertEquals(GameState.GAME_SETUP,menu.getSelector());
+
     }
 
     @Test
     public void testSetupDisplay(){
 
         menu.displayGameTitle();
-//        menu.processGameState();
-        bd.display();
 
-        String input = "1";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-//        menu.processChoice();
+//        InputStream stdin = System.in;
+//        String input = "1";
+//        InputStream in = new ByteArrayInputStream(input.getBytes());
+//        System.setIn(in);
+        menu.processGameState(
+                (currentPlayer) -> GameState.GAME_SETUP,
+                (currentPlayer) -> GameState.GAME_QUIT
+        );
 
-//        menu.processGameState();
+//        System.setIn(stdin);
+//        input = "1";
+//        InputStream in2 = new ByteArrayInputStream(input.getBytes());
+//        System.setIn(in2);
+        menu.processGameState(
+                (currentPlayer) -> players,
+                (currentPlayer) -> players2
+        );
+//        System.setIn(stdin);
 
-        assertFalse(menu.isQuit());
+        assertEquals(players.get(0),menu.getPlayerOne());
+        assertEquals(players.get(1),menu.getPlayerTwo());
 
     }
+
 }

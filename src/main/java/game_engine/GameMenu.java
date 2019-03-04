@@ -12,6 +12,7 @@ import java.util.function.Supplier;
 public class GameMenu {
 
     private GameManager gm;
+    private BoardDisplay bd;
 
     private Random random;
 
@@ -59,6 +60,7 @@ public class GameMenu {
 
     private Player playerOne;
     private Player playerTwo;
+    private List<Player> players;
 
     private Player currentPlayer;
 
@@ -73,14 +75,31 @@ public class GameMenu {
         messages.add(quitMessage);
     }
 
-    public GameMenu(GameManager gm) {
+    public GameMenu(GameManager gm, BoardDisplay bd) {
         this.gm = gm;
+        this.bd = bd;
         this.selector = GameState.GAME_START;
         populateMessageList();
     }
 
+    public BoardDisplay getBd() {
+        return bd;
+    }
+
+    public GameState getSelector() {
+        return selector;
+    }
+
     public String getMessage(int index) {
         return messages.get(index);
+    }
+
+    public Player getPlayerOne() {
+        return playerOne;
+    }
+
+    public Player getPlayerTwo() {
+        return playerTwo;
     }
 
     public void setPlayerOne(Player playerOne) {
@@ -120,9 +139,11 @@ public class GameMenu {
         System.out.println("===========");
     }
 
+    // always 1
     public int readIntChoice (){
-        Scanner reader = new Scanner(System.in);
-        return reader.nextInt();
+//        Scanner reader = new Scanner(System.in);
+//        return reader.nextInt();
+        return 1;
     }
 
     public String readStringChoice (){
@@ -145,6 +166,27 @@ public class GameMenu {
                 break;
         }
     }
+
+    public <R> void processChoice2 (Function<Player,R> case1, Function<Player,R> case2){
+        R intermediary;
+        switch(readIntChoice()){
+            case 1:
+                intermediary = case1.apply(currentPlayer);
+                players = (List<Player>) intermediary;
+                setPlayerOne(players.get(0));
+                setPlayerTwo(players.get(1));
+                break;
+            case 2:
+                intermediary = case2.apply(currentPlayer);
+                players = (List<Player>) intermediary;
+                setPlayerOne(players.get(0));
+                setPlayerTwo(players.get(1));
+                break;
+            default:
+                break;
+        }
+    }
+
 //readStringChoice nie wystarczy?
     public void processChoice (String stringInput){
 
@@ -158,10 +200,7 @@ public class GameMenu {
                 processChoice(case1,case2);
                 break;
             case GAME_SETUP:
-                for (int i = 1; i <= 3; i++){
-                    displayOptions(i);
-
-                }
+                processChoice2(case1,case2);
                 break;
             case GAME_RUNNING:
                 displayOptions(4);
