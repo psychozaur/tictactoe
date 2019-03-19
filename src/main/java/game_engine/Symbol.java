@@ -2,7 +2,7 @@ package game_engine;
 
 public class Symbol {
 
-    private String mark;
+    private String mark = "empty";
 
     public String getMark(){
         return mark;
