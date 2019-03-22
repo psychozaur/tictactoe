@@ -26,6 +26,9 @@ public class GameManager {
         return currentPlayer;
     }
 
+    public EndOfGame getEog() {
+        return eog;
+    }
 
     public void readMove(int input){
 

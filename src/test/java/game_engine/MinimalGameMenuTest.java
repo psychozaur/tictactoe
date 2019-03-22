@@ -36,36 +36,27 @@ public class MinimalGameMenuTest {
         players.get(1).setPlayerSymbol(symbol2);
         gm = new GameManager(players, eog);
         bd = new BoardDisplay(board);
-        menu = new MinimalGameMenu(gm);
-        moves = Arrays.asList(5,4,1,9,2,3,6,8,7);
+        menu = new MinimalGameMenu(gm,bd);
+        moves = Arrays.asList(5,4,1,9,2,3,8,6,7);
     }
 
     @Test
     public void testNamesDisplay(){
-        menu.displayNamesAndSymbols();
+        menu.displayPlayerNamesAndSymbols();
     }
 
     @Test
     public void testNamesWithBoardDisplay(){
-        menu.displayNamesAndSymbols();
+        menu.displayPlayerNamesAndSymbols();
         bd.display();
     }
 
     @Test
     public void testMoveDisplay(){
         for (Integer move : moves){
-            menu.displayNamesAndSymbols();
-
-            try {
-                gm.readMove(move);
-            } catch (GameHasEndedException e) {
-                System.out.println(gm.getCurrentPlayer().getName().orElse("") + " won.");
-            } finally {
-                bd.display();
-            }
-
+            menu.readMoveAndDisplayAll(move);
         }
 
-        assertEquals(GameState.GAME_DRAW, eog.getGameState());
+        assertEquals(GameState.GAME_WON, eog.getGameState());
     }
 }

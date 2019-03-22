@@ -11,6 +11,7 @@ public class EndOfGame {
     public EndOfGame(Board board) {
         this.isSolved = false;
         this.board = board;
+        this.gameState = GameState.GAME_START;
     }
 
     public boolean isSolved() {
