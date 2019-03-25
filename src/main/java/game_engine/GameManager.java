@@ -30,6 +30,14 @@ public class GameManager {
         return eog;
     }
 
+    public boolean checkEnd(){
+        if((eog.getGameState().equals(GameState.GAME_WON)
+                || eog.getGameState().equals(GameState.GAME_DRAW))){
+            return true;
+        }
+        return false;
+    }
+
     public void readMove(int input){
 
         List<Integer> coordinates = currentPlayer.getCellAddressAfterInput(input);
@@ -37,7 +45,10 @@ public class GameManager {
                                             coordinates.get(0),
                                             coordinates.get(1));
 
-        if (eog.checkEnd().toString() != "Empty" || eog.isSolved()){
+        eog.checkWin();
+        eog.checkDraw();
+//        if (eog.checkWin().toString() != "Empty" || checkEnd()){
+        if (checkEnd()){
             throw new GameHasEndedException("Game has ended already!");
         }
 

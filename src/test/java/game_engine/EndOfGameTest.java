@@ -12,7 +12,7 @@ public class EndOfGameTest {
         EndOfGame eog = new EndOfGame(new Board(3));
         boolean result = true;
 
-        if ("Empty" == eog.checkEnd().toString()) result = false;
+        if ("Empty" == eog.checkWin().toString()) result = false;
 
         assertFalse(result);
     }
@@ -28,7 +28,7 @@ public class EndOfGameTest {
 
         EndOfGame eog = new EndOfGame(board);
 
-        assertSame(symbol,eog.checkEnd());
+        assertSame(symbol,eog.checkWin());
 
     }
 
@@ -43,7 +43,7 @@ public class EndOfGameTest {
 
         EndOfGame eog = new EndOfGame(board);
 
-        assertSame(symbol,eog.checkEnd());
+        assertSame(symbol,eog.checkWin());
 
     }
 
@@ -58,7 +58,7 @@ public class EndOfGameTest {
 
         EndOfGame eog = new EndOfGame(board);
 
-        assertSame(symbol,eog.checkEnd());
+        assertSame(symbol,eog.checkWin());
 
     }
 
@@ -73,7 +73,7 @@ public class EndOfGameTest {
 
         EndOfGame eog = new EndOfGame(board);
 
-        assertSame(symbol,eog.checkEnd());
+        assertSame(symbol,eog.checkWin());
 
     }
 }

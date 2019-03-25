@@ -72,7 +72,7 @@ public class GameManagerTest {
 
             fail();
         } catch (GameHasEndedException e) {
-            assertEquals("Empty",eog.checkEnd().toString());
+            assertEquals("Empty",eog.checkWin().toString());
             assertEquals(e.getMessage(),"Game has ended already!");
         } catch (Exception e){
             fail();

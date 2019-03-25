@@ -20,9 +20,8 @@ public class Main {
         MinimalGameMenu menu = new MinimalGameMenu(gm,bd);
 //        List<Integer> moves = Arrays.asList(5,4,1,9,2,3,8,6,7);
 
-//        while (!(gm.getEog().getGameState().equals(GameState.GAME_WON) ||
-//                gm.getEog().getGameState().equals(GameState.GAME_DRAW))){
-        while (true){
+        while (!gm.checkEnd()){
+//        while (true){
             Scanner inputReader = new Scanner(System.in);
             int nextMove = inputReader.nextInt();
             menu.readMoveAndDisplayAll(nextMove);

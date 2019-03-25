@@ -1,8 +1,11 @@
 package game_engine;
 
 import java.util.*;
+import java.util.logging.Logger;
 
 public class EndOfGame {
+
+    private static Logger logger = Logger.getLogger(EndOfGame.class.getName());
 
     private boolean isSolved;
     private Board board;
@@ -54,7 +57,7 @@ public class EndOfGame {
         return result;
     }
 
-    public Symbol checkEnd(){
+    public Symbol checkWin(){
 
         Set maybeWinner = new HashSet();
         Symbol result;
@@ -63,11 +66,13 @@ public class EndOfGame {
         for (int i = 0; i < board.getSize(); i++){
             result = checkLine(board.getRow(i),maybeWinner);
             if (result.toString() != "Empty") {
+                logger.info("Game won");
                 setGameState(GameState.GAME_WON);
                 return result;
             }
             result = checkLine(board.getColumn(i),maybeWinner);
             if (result.toString() != "Empty") {
+                logger.info("Game won");
                 setGameState(GameState.GAME_WON);
                 return result;
             }
@@ -75,26 +80,35 @@ public class EndOfGame {
 
         result = checkLine(board.getSlash(),maybeWinner);
         if (result.toString() != "Empty") {
+            logger.info("Game won");
             setGameState(GameState.GAME_WON);
             return result;
         }
         result = checkLine(board.getBackslash(),maybeWinner);
         if (result.toString() != "Empty") {
+            logger.info("Game won");
             setGameState(GameState.GAME_WON);
             return result;
         }
 
+        return result;
+    }
+
+    public void checkDraw(){
         //draw
         for (int i = 0; i < (board.getSize() * board.getSize()); i++){
             if (board.isCellEmpty(i % 3,i / 3)){
                 isSolved = false;
-                return result;
+                break;
             } else {
+                logger.info("Game draw");
                 setGameState(GameState.GAME_DRAW);
                 isSolved = true;
             }
         }
-
-        return result;
     }
+
+
+
+
 }
