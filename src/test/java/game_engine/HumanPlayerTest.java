@@ -14,30 +14,28 @@ public class HumanPlayerTest {
     Board board;
     Symbol symbol;
     String name;
+    Player player;
 
     @Before
     public void setUp(){
         board = new Board(3);
         symbol = new Cross();
+        player = new HumanPlayer(board);
         name = "Marcin";
+        player.setName(name);
+        player.setPlayerSymbol(symbol);
     }
 
     @Test
     public void testIfHumanPlayerCreationIsPossible(){
 
-        Player player = new HumanPlayer(board);
-
-        assertEquals(symbol,((HumanPlayer) player).getPlayerSymbol());
+        assertEquals(symbol,((HumanPlayer) player).getPlayerSymbol().orElse(new Symbol()));
 
     }
 
     @Test
     public void testIsCorrectAddressReturnedAfterEnteringInput(){
 
-        Player player = new HumanPlayer(board);
-//        Scanner scanner = new Scanner(System.in);
-
-//        int search = scanner.nextInt();
         int search = 5;
 
         List<Integer> coordinates = ((HumanPlayer) player).getCellAddressAfterInput(search);
@@ -48,7 +46,6 @@ public class HumanPlayerTest {
     @Test
     public void testIfIllegalInputThrowsException(){
 
-        Player player = new HumanPlayer(board);
         int search = -1;
 
         try {

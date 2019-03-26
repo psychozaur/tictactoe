@@ -12,19 +12,20 @@ public class AIPlayerTest {
 
     Board board;
     Symbol symbol;
+    Player player;
 
     @Before
     public void setUp(){
         board = new Board(3);
         symbol = new Cross();
+        player = new AIPlayer(board);
+        player.setPlayerSymbol(symbol);
     }
 
     @Test
     public void testIfAIPlayerCreationIsPossible(){
 
-        Player player = new AIPlayer(board);
-
-        assertEquals(symbol,((AIPlayer) player).getPlayerSymbol());
+        assertEquals(symbol,((AIPlayer) player).getPlayerSymbol().orElse(new Symbol()));
 
     }
 
@@ -32,7 +33,6 @@ public class AIPlayerTest {
     public void testIfReturnedAddressIsFreeToSelect(){
 
         board.insert(symbol,1,1);
-        Player player = new AIPlayer(board);
         int search = 5;
 
         try {

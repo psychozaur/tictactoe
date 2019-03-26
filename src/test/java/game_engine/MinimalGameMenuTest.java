@@ -59,4 +59,6 @@ public class MinimalGameMenuTest {
 
         assertEquals(GameState.GAME_WON, eog.getGameState());
     }
+
+
 }

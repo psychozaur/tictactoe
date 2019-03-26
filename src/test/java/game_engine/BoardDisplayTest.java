@@ -31,6 +31,8 @@ public class BoardDisplayTest {
         eog = new EndOfGame(board);
         players = Arrays.asList(new HumanPlayer(board),
                 new AIPlayer(board));
+        players.get(0).setPlayerSymbol(symbol);
+        players.get(1).setPlayerSymbol(aiSymbol);
         gm = new GameManager(players, eog);
         bd = new BoardDisplay(board);
     }
@@ -71,20 +73,21 @@ public class BoardDisplayTest {
     @Test
     public void testHowItDisplaysPartiallyFullBoard(){
 
-        try {
-            for (int i = 1; i <= (board.getSize() * board.getSize()); i++){
-                gm.readMove(i);
-            }
 
-            fail();
-        } catch (GameHasEndedException e) {
-            assertNotEquals("Empty",gm.getCurrentPlayer().getPlayerSymbol().toString());
-            assertEquals("Game has ended already!", e.getMessage());
-        } catch (Exception e){
-            fail();
-        } finally {
-            bd.display();
-        }
+            try {
+                for (int i = 1; i <= (board.getSize() * board.getSize()); i++) {
+                    gm.readMove(i);
+                }
+
+                fail();
+            } catch (GameHasEndedException e) {
+                assertNotEquals("Empty", gm.getCurrentPlayer().getPlayerSymbol().toString());
+                assertEquals("Game has ended already!", e.getMessage());
+            } catch (Exception e) {
+                fail();
+            } finally {
+                bd.display();
+            }
 
     }
 }

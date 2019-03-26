@@ -11,25 +11,22 @@ public class Main {
         EndOfGame eog = new EndOfGame(board);
         List<Player> players = Arrays.asList(new HumanPlayer(board),
                 new HumanPlayer(board));
-        players.get(0).setName("Krzychu");
-        players.get(1).setName("Zbychu");
-        players.get(0).setPlayerSymbol(new Cross());
-        players.get(1).setPlayerSymbol(new Nought());
+
         GameManager gm = new GameManager(players, eog);
         BoardDisplay bd = new BoardDisplay(board);
         MinimalGameMenu menu = new MinimalGameMenu(gm,bd);
-//        List<Integer> moves = Arrays.asList(5,4,1,9,2,3,8,6,7);
+
+        menu.setUpNamesAndSymbols();
+
+        gm.getEog().setGameState(GameState.GAME_RUNNING);
 
         while (!gm.checkEnd()){
-//        while (true){
             Scanner inputReader = new Scanner(System.in);
+            System.out.println("Enter a number between 1 and 9, " + gm.getCurrentPlayer().getName().orElse("Unnamed One"));
             int nextMove = inputReader.nextInt();
             menu.readMoveAndDisplayAll(nextMove);
         }
 
-//        for (Integer move : moves){
-//            menu.readMoveAndDisplayAll(move);
-//        }
 
     }
 }

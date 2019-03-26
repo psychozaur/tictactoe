@@ -55,6 +55,12 @@ public class Board {
         return result;
     }
 
+    public boolean isBoardFull(){
+        return state.stream()
+                .flatMap(List::stream)
+                .noneMatch(x -> x.toString() == "Empty");
+    }
+
     public boolean isCellEmpty(int i, int j) {
         if ("Empty" == state.get(i).get(j).toString())  return true;
             return false;

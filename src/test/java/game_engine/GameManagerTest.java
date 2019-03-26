@@ -28,6 +28,8 @@ public class GameManagerTest {
         eog = new EndOfGame(board);
         players = Arrays.asList(new HumanPlayer(board),
                             new AIPlayer(board));
+        players.get(0).setPlayerSymbol(symbol);
+        players.get(1).setPlayerSymbol(aiSymbol);
         gm = new GameManager(players, eog);
     }
 
@@ -124,7 +126,7 @@ public class GameManagerTest {
 
         gm.readMove(input);
 
-        assertEquals(currentPlayer.getPlayerSymbol(),board.get(coordinates.get(0),coordinates.get(1)));
+        assertEquals(currentPlayer.getPlayerSymbol().orElse(new Symbol()),board.get(coordinates.get(0),coordinates.get(1)));
 
         input = 6;
         coordinates = gm.getCurrentPlayer().getCellAddressAfterInput(input);
@@ -132,7 +134,7 @@ public class GameManagerTest {
 
         gm.readMove(input);
 
-        assertEquals(currentPlayer.getPlayerSymbol(),board.get(coordinates.get(0),coordinates.get(1)));
+        assertEquals(currentPlayer.getPlayerSymbol().orElse(new Symbol()),board.get(coordinates.get(0),coordinates.get(1)));
     }
 
     @Test
