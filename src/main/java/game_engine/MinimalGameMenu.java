@@ -17,10 +17,12 @@ public class MinimalGameMenu {
 
     private void assignSymbolsToPlayers(String input){
         switch(input){
+            case "x":
             case "X":
                 gm.getPlayers().get(0).setPlayerSymbol(new Cross());
                 gm.getPlayers().get(1).setPlayerSymbol(new Nought());
                 break;
+            case "o":
             case "O":
                 gm.getPlayers().get(0).setPlayerSymbol(new Nought());
                 gm.getPlayers().get(1).setPlayerSymbol(new Cross());
@@ -36,7 +38,7 @@ public class MinimalGameMenu {
         while (gm.getPlayers()
                 .stream()
                 .filter(player -> player.getName().equals(Optional.empty())
-                        && player.getPlayerSymbol().equals(Optional.empty()))
+                        || player.getPlayerSymbol().equals(Optional.empty()))
                 .count() > 0){
             Scanner reader = new Scanner(System.in);
             System.out.println("What's your name, Player 1?");
