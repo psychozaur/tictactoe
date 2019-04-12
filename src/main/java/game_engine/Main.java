@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
         Board board = new Board(3);
-        EndOfGame eog = new EndOfGame(board);
+        GameParser eog = new GameParser(board);
         List<Player> players = Arrays.asList(new HumanPlayer(board),
                 new HumanPlayer(board));
 

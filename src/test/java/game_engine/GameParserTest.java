@@ -4,12 +4,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class EndOfGameTest {
+public class GameParserTest {
 
     @Test
     public void testIsEmptyBoardNotWon()
     {
-        EndOfGame eog = new EndOfGame(new Board(3));
+        GameParser eog = new GameParser(new Board(3));
         boolean result = true;
 
         if ("Empty" == eog.checkWin().toString()) result = false;
@@ -26,7 +26,7 @@ public class EndOfGameTest {
         board.insert(symbol,1,1);
         board.insert(symbol,1,2);
 
-        EndOfGame eog = new EndOfGame(board);
+        GameParser eog = new GameParser(board);
 
         assertSame(symbol,eog.checkWin());
 
@@ -41,7 +41,7 @@ public class EndOfGameTest {
         board.insert(symbol,1,2);
         board.insert(symbol,2,2);
 
-        EndOfGame eog = new EndOfGame(board);
+        GameParser eog = new GameParser(board);
 
         assertSame(symbol,eog.checkWin());
 
@@ -56,7 +56,7 @@ public class EndOfGameTest {
         board.insert(symbol,1,1);
         board.insert(symbol,0,2);
 
-        EndOfGame eog = new EndOfGame(board);
+        GameParser eog = new GameParser(board);
 
         assertSame(symbol,eog.checkWin());
 
@@ -71,7 +71,7 @@ public class EndOfGameTest {
         board.insert(symbol,1,1);
         board.insert(symbol,2,2);
 
-        EndOfGame eog = new EndOfGame(board);
+        GameParser eog = new GameParser(board);
 
         assertSame(symbol,eog.checkWin());
 

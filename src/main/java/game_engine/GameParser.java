@@ -3,14 +3,14 @@ package game_engine;
 import java.util.*;
 import java.util.logging.Logger;
 
-public class EndOfGame {
+public class GameParser {
 
-    private static Logger logger = Logger.getLogger(EndOfGame.class.getName());
+    private static Logger logger = Logger.getLogger(GameParser.class.getName());
 
     private Board board;
     private GameState gameState;
 
-    public EndOfGame(Board board) {
+    public GameParser(Board board) {
         this.board = board;
         this.gameState = GameState.GAME_START;
     }
@@ -23,7 +23,7 @@ public class EndOfGame {
         this.gameState = gameState;
     }
 
-    public Symbol checkLine (List<Symbol> line, Set maybeWinner){
+    private Symbol checkLine (List<Symbol> line, Set maybeWinner){
 
         Symbol result = new Symbol();
 

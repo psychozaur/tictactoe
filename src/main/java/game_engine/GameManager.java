@@ -6,9 +6,9 @@ public class GameManager {
 
     private Player currentPlayer;
     private List<Player> players;
-    private EndOfGame eog;
+    private GameParser eog;
 
-    public GameManager(List<Player> players, EndOfGame eog) {
+    public GameManager(List<Player> players, GameParser eog) {
         this.players = players;
         this.eog = eog;
         this.currentPlayer = players.get(0);
@@ -26,7 +26,7 @@ public class GameManager {
         return currentPlayer;
     }
 
-    public EndOfGame getEog() {
+    public GameParser getEog() {
         return eog;
     }
 

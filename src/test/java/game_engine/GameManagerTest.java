@@ -16,7 +16,7 @@ public class GameManagerTest {
     Player currentPlayer;
     List<Player> players;
     GameManager gm;
-    EndOfGame eog;
+    GameParser eog;
     String name;
 
     @Before
@@ -25,7 +25,7 @@ public class GameManagerTest {
         symbol = new Cross();
         aiSymbol = new Nought();
         board = new Board(3);
-        eog = new EndOfGame(board);
+        eog = new GameParser(board);
         players = Arrays.asList(new HumanPlayer(board),
                             new AIPlayer(board));
         players.get(0).setPlayerSymbol(symbol);
@@ -34,7 +34,7 @@ public class GameManagerTest {
     }
 
     @Test
-    public void testIfGameManagerCanBeCreated(){
+    public void testIfGameManagerGotInitializedWithPlayers(){
 
         assertSame(players,gm.getPlayers());
     }

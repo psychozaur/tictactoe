@@ -4,11 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 import static org.junit.Assert.*;
 
@@ -20,7 +18,7 @@ public class GameMenuTest {
     Player currentPlayer;
     List<Player> players;
     GameManager gm;
-    EndOfGame eog;
+    GameParser eog;
     BoardDisplay bd;
     GameMenu menu;
 
@@ -32,7 +30,7 @@ public class GameMenuTest {
         symbol = new Cross();
         aiSymbol = new Nought();
         board = new Board(3);
-        eog = new EndOfGame(board);
+        eog = new GameParser(board);
         players = Arrays.asList(new HumanPlayer(board),
                 new AIPlayer(board));
         gm = new GameManager(players, eog);

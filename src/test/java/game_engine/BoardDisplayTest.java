@@ -18,7 +18,7 @@ public class BoardDisplayTest {
     Player currentPlayer;
     List<Player> players;
     GameManager gm;
-    EndOfGame eog;
+    GameParser eog;
     BoardDisplay bd;
     String name;
 
@@ -28,7 +28,7 @@ public class BoardDisplayTest {
         symbol = new Cross();
         aiSymbol = new Nought();
         board = new Board(3);
-        eog = new EndOfGame(board);
+        eog = new GameParser(board);
         players = Arrays.asList(new HumanPlayer(board),
                 new AIPlayer(board));
         players.get(0).setPlayerSymbol(symbol);

@@ -17,7 +17,7 @@ public class MinimalGameMenuTest {
     Player currentPlayer;
     List<Player> players;
     GameManager gm;
-    EndOfGame eog;
+    GameParser eog;
     BoardDisplay bd;
     MinimalGameMenu menu;
     List<Integer> moves;
@@ -27,7 +27,7 @@ public class MinimalGameMenuTest {
         symbol1 = new Cross();
         symbol2 = new Nought();
         board = new Board(3);
-        eog = new EndOfGame(board);
+        eog = new GameParser(board);
         players = Arrays.asList(new HumanPlayer(board),
                 new HumanPlayer(board));
         players.get(0).setName("Krzychu");
