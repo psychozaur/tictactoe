@@ -29,6 +29,10 @@ public class AIPlayer implements Player {
         return gameBoard;
     }
 
+    private void setGameBoard(Board gameBoard) {
+        this.gameBoard = gameBoard;
+    }
+
     public Optional<String> getName() {
         return Optional.ofNullable(name);
     }
@@ -36,7 +40,7 @@ public class AIPlayer implements Player {
     public void setName(String name){}
 
 
-    public List<Integer> getCellAddressAfterInput (int search){
+    public List<Integer> getCellAddressAfterInput (int search, Board board){
         List<Integer> coordinates = new ArrayList<Integer>();
 
         if (search <= 0 || search > (gameBoard.getSize() * gameBoard.getSize())){

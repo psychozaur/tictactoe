@@ -2,6 +2,7 @@ package game_engine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Board {
 
@@ -15,6 +16,10 @@ public class Board {
                 state.get(i).add(new Symbol());
             }
         }
+    }
+
+    public List<List<Symbol>> getState() {
+        return state;
     }
 
     public int getSize() {
@@ -84,5 +89,22 @@ public class Board {
         }
 
         return state.get(xPos).get(yPos);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (this == obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(state);
+    }
+
+    @Override
+    public String toString() {
+        return "Board{" +
+                "state=" + state +
+                '}';
     }
 }

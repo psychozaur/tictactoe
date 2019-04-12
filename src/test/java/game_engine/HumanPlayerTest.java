@@ -38,7 +38,7 @@ public class HumanPlayerTest {
 
         int search = 5;
 
-        List<Integer> coordinates = ((HumanPlayer) player).getCellAddressAfterInput(search);
+        List<Integer> coordinates = ((HumanPlayer) player).getCellAddressAfterInput(search, board);
 
         assertEquals(Arrays.asList(Integer.valueOf(1), Integer.valueOf(1)), coordinates);
     }
@@ -49,7 +49,7 @@ public class HumanPlayerTest {
         int search = -1;
 
         try {
-            ((HumanPlayer) player).getCellAddressAfterInput(search);
+            ((HumanPlayer) player).getCellAddressAfterInput(search, board);
             fail();
         } catch (IllegalInputException e) {
             assertEquals(e.getMessage(),"Input must be between 1 and 9");

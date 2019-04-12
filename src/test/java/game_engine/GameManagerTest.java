@@ -13,10 +13,13 @@ public class GameManagerTest {
     Symbol symbol;
     Symbol aiSymbol;
     Board board;
+    Board board2;
     Player currentPlayer;
     List<Player> players;
     GameManager gm;
-    GameParser eog;
+    GameManager gm2;
+    GameParser parser;
+    GameParser parser2;
     String name;
 
     @Before
@@ -25,12 +28,16 @@ public class GameManagerTest {
         symbol = new Cross();
         aiSymbol = new Nought();
         board = new Board(3);
-        eog = new GameParser(board);
+        parser = new GameParser(board);
         players = Arrays.asList(new HumanPlayer(board),
                             new AIPlayer(board));
         players.get(0).setPlayerSymbol(symbol);
         players.get(1).setPlayerSymbol(aiSymbol);
-        gm = new GameManager(players, eog);
+        gm = new GameManager(players, parser);
+        board2 = new Board(3);
+        parser2 = new GameParser(board2);
+        gm2 = new GameManager(players, parser2);
+        gm2.readMove(5);
     }
 
     @Test
@@ -44,7 +51,7 @@ public class GameManagerTest {
 
         gm.readMove(5);
 
-        assertSame(board,gm.getCurrentPlayer().getGameBoard());
+        assertEquals(board2.getState(),board.getState());
     }
 
     @Test
@@ -74,7 +81,7 @@ public class GameManagerTest {
 
             fail();
         } catch (GameHasEndedException e) {
-            assertEquals("Empty",eog.checkWin().toString());
+            assertEquals("Empty",parser.checkWin().toString());
             assertEquals(e.getMessage(),"Game has ended already!");
         } catch (Exception e){
             fail();
@@ -110,7 +117,7 @@ public class GameManagerTest {
     public void testIfInputIsPassedToBoard(){
 
         int input = 5;
-        List<Integer> coordinates = gm.getCurrentPlayer().getCellAddressAfterInput(5);
+        List<Integer> coordinates = gm.getCurrentPlayer().getCellAddressAfterInput(5, board);
 
         gm.readMove(input);
 
@@ -121,7 +128,7 @@ public class GameManagerTest {
     public void testIfCorrectPlayerSymbolIsPassedToBoard(){
 
         int input = 5;
-        List<Integer> coordinates = gm.getCurrentPlayer().getCellAddressAfterInput(input);
+        List<Integer> coordinates = gm.getCurrentPlayer().getCellAddressAfterInput(input, board);
         currentPlayer = gm.getCurrentPlayer();
 
         gm.readMove(input);
@@ -129,7 +136,7 @@ public class GameManagerTest {
         assertEquals(currentPlayer.getPlayerSymbol().orElse(new Symbol()),board.get(coordinates.get(0),coordinates.get(1)));
 
         input = 6;
-        coordinates = gm.getCurrentPlayer().getCellAddressAfterInput(input);
+        coordinates = gm.getCurrentPlayer().getCellAddressAfterInput(input, board);
         currentPlayer = gm.getCurrentPlayer();
 
         gm.readMove(input);

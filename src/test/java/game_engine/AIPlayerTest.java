@@ -36,7 +36,7 @@ public class AIPlayerTest {
         int search = 5;
 
         try {
-            ((AIPlayer) player).getCellAddressAfterInput(search);
+            ((AIPlayer) player).getCellAddressAfterInput(search, board);
             fail();
         } catch (IllegalInputException e) {
             assertEquals(e.getMessage(),"This field is already occupied!");

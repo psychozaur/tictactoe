@@ -15,6 +15,10 @@ public class GameParser {
         this.gameState = GameState.GAME_START;
     }
 
+    public Board getBoard() {
+        return board;
+    }
+
     public GameState getGameState() {
         return gameState;
     }

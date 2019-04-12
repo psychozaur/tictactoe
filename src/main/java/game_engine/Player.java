@@ -10,6 +10,6 @@ public interface Player {
     public Board getGameBoard();
     public Optional<String> getName();
     public void setName(String name);
-    public List<Integer> getCellAddressAfterInput(int search);
+    public List<Integer> getCellAddressAfterInput(int search, Board board);
 
 }
