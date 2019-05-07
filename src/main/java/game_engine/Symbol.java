@@ -12,4 +12,17 @@ public class Symbol {
     public String toString() {
         return "Empty";
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (null == obj || this.getClass() != obj.getClass()){
+            return false;
+        }
+        return true;
+    }
 }

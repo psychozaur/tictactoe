@@ -3,9 +3,11 @@ package game_engine;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 public class GameManagerTest {
@@ -38,6 +40,8 @@ public class GameManagerTest {
         parser2 = new GameParser(board2);
         gm2 = new GameManager(players, parser2);
         gm2.readMove(5);
+        gm2.readMove(4);
+        gm2.readMove(6);
     }
 
     @Test
@@ -50,8 +54,11 @@ public class GameManagerTest {
     public void testIfPlayersMoveIsRead(){
 
         gm.readMove(5);
+        gm.readMove(4);
+        gm.readMove(6);
 
-        assertEquals(board2.getState(),board.getState());
+        assertEquals(board.getState(),board2.getState());
+
     }
 
     @Test

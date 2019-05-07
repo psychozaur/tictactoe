@@ -49,7 +49,7 @@ public class HumanPlayerTest {
         int search = -1;
 
         try {
-            ((HumanPlayer) player).getCellAddressAfterInput(search, board);
+            player.getCellAddressAfterInput(search, board);
             fail();
         } catch (IllegalInputException e) {
             assertEquals(e.getMessage(),"Input must be between 1 and 9");

@@ -42,6 +42,7 @@ public class AIPlayer implements Player {
 
     public List<Integer> getCellAddressAfterInput (int search, Board board){
         List<Integer> coordinates = new ArrayList<Integer>();
+        setGameBoard(board);
 
         if (search <= 0 || search > (gameBoard.getSize() * gameBoard.getSize())){
             throw new IllegalInputException("Input must be between 1 and 9");
