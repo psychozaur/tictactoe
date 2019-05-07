@@ -23,6 +23,9 @@ public class GameManagerTest {
     GameParser parser;
     GameParser parser2;
     String name;
+    List<Integer> movesToDraw;
+    List<Integer> movesToWin;
+
 
     @Before
     public void setUp(){
@@ -42,6 +45,10 @@ public class GameManagerTest {
         gm2.readMove(5);
         gm2.readMove(4);
         gm2.readMove(6);
+
+        movesToDraw = Arrays.asList(5,1,8,2,3,7,4,6,9);
+        movesToWin = Arrays.asList(5,1,8,2,3,7,4,9,6);
+
     }
 
     @Test
@@ -76,15 +83,9 @@ public class GameManagerTest {
     public void testIfMovesArentReadWhenDraw(){
 
         try {
-                gm.readMove(5);
-                gm.readMove(1);
-                gm.readMove(8);
-                gm.readMove(2);
-                gm.readMove(3);
-                gm.readMove(7);
-                gm.readMove(4);
-                gm.readMove(6);
-                gm.readMove(9);
+            for (Integer move : movesToDraw){
+                gm.readMove(move);
+            }
 
             fail();
         } catch (GameHasEndedException e) {
@@ -100,15 +101,9 @@ public class GameManagerTest {
     public void testIfMovesArentReadWhenWon(){
 
         try {
-            gm.readMove(5);
-            gm.readMove(1);
-            gm.readMove(8);
-            gm.readMove(2);
-            gm.readMove(3);
-            gm.readMove(7);
-            gm.readMove(4);
-            gm.readMove(9);
-            gm.readMove(6);
+            for (Integer move : movesToWin){
+                gm.readMove(move);
+            }
 
             fail();
         } catch (GameHasEndedException e) {

@@ -21,6 +21,7 @@ public class BoardDisplayTest {
     GameParser eog;
     BoardDisplay bd;
     String name;
+    List<Integer> movesToDraw;
 
     @Before
     public void setUp(){
@@ -35,6 +36,8 @@ public class BoardDisplayTest {
         players.get(1).setPlayerSymbol(aiSymbol);
         gm = new GameManager(players, eog);
         bd = new BoardDisplay(board);
+
+        movesToDraw = Arrays.asList(5,1,8,2,3,7,4,6,9);
     }
 
     @Test
@@ -48,15 +51,11 @@ public class BoardDisplayTest {
     public void testHowItDisplaysFullBoard(){
 
         try {
-            gm.readMove(5);
-            gm.readMove(1);
-            gm.readMove(8);
-            gm.readMove(2);
-            gm.readMove(3);
-            gm.readMove(7);
-            gm.readMove(4);
-            gm.readMove(6);
-            gm.readMove(9);
+            for (Integer move : movesToDraw){
+                gm.readMove(move);
+            }
+
+            bd.display();
 
             fail();
         } catch (GameHasEndedException e) {
@@ -64,8 +63,6 @@ public class BoardDisplayTest {
             assertEquals("Game has ended already!", e.getMessage());
         } catch (Exception e){
             fail();
-        } finally {
-            bd.display();
         }
 
     }
@@ -79,14 +76,14 @@ public class BoardDisplayTest {
                     gm.readMove(i);
                 }
 
+                bd.display();
+
                 fail();
             } catch (GameHasEndedException e) {
                 assertNotEquals("Empty", gm.getCurrentPlayer().getPlayerSymbol().toString());
                 assertEquals("Game has ended already!", e.getMessage());
             } catch (Exception e) {
                 fail();
-            } finally {
-                bd.display();
             }
 
     }
